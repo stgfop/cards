@@ -1,124 +1,154 @@
-img {
-    display: none;
-}
-.card {
-    width: 5.6cm;
-    height: 8.2cm;
-    border: 1px solid black;
+* {
+    font-family: Aladin;
 }
 
-.card .price {
-    float: left;
-    margin-bottom: 0px;
+[class^="container-card-"] {
+    width: 20cm;
+    border: 1px solid grey;
 }
-.card .points {
+
+.card-container {
+    display: inline;
+}
+
+.card {
+    display: inline-block;
+    width: 5.6cm;
+    height: 8.2cm;
+    border: 3px solid black;
+    margin: 2px;
+    padding: 0.2cm;
+}
+
+.card-play .price, .card-play .points {
+    font-size: 0.8cm;
+    position: relative;
+    top: 0.4cm;
+    width: 48px;
+    text-align: center;
+    border: 1px solid pink;
+    background-size: 192px;
+    background-image: url("../assets/resources.png");
+
+}
+
+.card-play .type {
+}
+.card-play .name {
+    font-size: 2em;
+    text-transform: capitalize;
+    text-align: center;
+    margin-bottom: 0.2cm;
+}
+.card-play .effect {
+    text-transform: capitalize;
+    text-align: center;
+    max-height: 1.1cm;
+    overflow: hidden;
+}
+
+.card-play .price {
+    float: left;
+}
+.card-play .points {
     float: right;
 }
 
-#ribbon {
-	width: 180px;
-	height: 280px;
-	margin: 50px auto 0;
-	position: relative;
-	overflow: hidden;
+[class^="resource-"] {
+    display: inline-block;
+    background-image: url("../assets/resources.png");
+    width: 128px;
+    height: 148px;
+    overflow: hidden;
 }
 
-#ribbon .inset {
-	width: 200px;
-	height: 55px;
-	position: absolute;
-	top: -50px;
-	left: -10px;
-	z-index: 5;
-	
-	-webkit-border-radius: 50%;
-	-moz-border-radius: 50%;
-	border-radius: 50%;
-	
-	background: rgba(0,0,0,0.3);
-	
-	box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.3);
-	-moz-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.3);
-	-webkit-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.3);
+.card-play .resource-container {
+    display: block;
+    margin: -0.01cm auto 0.2cm;
+    padding-top: 20px;
+    background: transparent;
 }
 
-#ribbon .container {
-	position: relative;
-	width: 100px;
-	height: 250px;
-	overflow: hidden;
-	margin: 0 auto;
-	border-left: 1px solid #631a15;
-	border-right: 1px solid #631a15;
+.resource-argile {background-position: 0      0    ;}
+.resource-stone  {background-position: -128px 0    ;}
+.resource-wood   {background-position: -256px 0    ;}
+.resource-wheat  {background-position: -384px 0    ;}
+.resource-iron   {background-position: 0      -128px;}
+.resource-gold   {background-position: -128px -128px;}
+.resource-cloth  {background-position: 0      -256px;}
+.resource-wool   {background-position: -128px -256px;}
+.resource-tool   {background-position: -256px -256px;}
+.resource-jewel  {background-position: -384px -256px;}
+.resource-meeple {background-position: 0      0    ;}
+.resource-score  {background-position: 0      0    ;}
+
+
+.ribbon {
+    font-size: 16px !important;
+    /* This ribbon is based on a 16px font side and a 24px vertical rhythm. I've used em's to position each element for scalability. If you want to use a different font size you may have to play with the position of the ribbon elements */
+
+    width: 3.5cm;
+
+    position: relative;
+    background: pink;
+    color: white;
+    text-align: center;
+    padding: 0.2cm 0.5cm; /* Adjust to suit */
+    margin: 0 auto 0; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
+}
+.ribbon:before, .ribbon:after {
+    content: "";
+    position: absolute;
+    display: block;
+    bottom: -0.3cm;
+    border: 0.5cm solid #986794;
+    z-index: -1;
+}
+.ribbon .ribbon-content:before, .ribbon .ribbon-content:after {
+    content: "";
+    position: absolute;
+    display: block;
+    border-style: solid;
+    border-color: #804f7c transparent transparent transparent;
+    bottom: -0.3cm;
+}
+.ribbon .ribbon-content:before {
+    left: 0;
+    border-width: 0.3cm 0 0 0.3cm;
+}
+.ribbon .ribbon-content:after {
+    right: 0;
+    border-width: 0.3cm 0.3cm 0 0;
 }
 
-#ribbon .base {
-	height: 200px;
-	width: 100px;
-	
-	background: rgb(199,59,60);
-	background: -moz-linear-gradient(top,  rgba(199,59,60,1) 0%, rgba(184,32,31,1) 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(199,59,60,1)), color-stop(100%,rgba(184,32,31,1)));
-	background: -webkit-linear-gradient(top,  rgba(199,59,60,1) 0%,rgba(184,32,31,1) 100%);
-	background: -o-linear-gradient(top,  rgba(199,59,60,1) 0%,rgba(184,32,31,1) 100%);
-	background: -ms-linear-gradient(top,  rgba(199,59,60,1) 0%,rgba(184,32,31,1) 100%);
-	background: linear-gradient(top,  rgba(199,59,60,1) 0%,rgba(184,32,31,1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c73b3c', endColorstr='#b8201f',GradientType=0 );
+.ribbon-color-blue {background-color: #5682c4;}
+.ribbon-color-blue .ribbon-content:before, .ribbon-color-blue .ribbon-content:after {border-color: #325282;}
+.ribbon-color-blue:before, .ribbon-color-blue:after {border-color: #476899;}
 
-	position: relative;
-	z-index: 2;
+.ribbon-color-green {background-color: #39ac45;}
+.ribbon-color-green .ribbon-content:before, .ribbon-color-green .ribbon-content:after {border-color: #23692a;}
+.ribbon-color-green:before, .ribbon-color-green:after {border-color: #2c8535;}
+
+.ribbon-color-purple {background-color: #8752be;}
+.ribbon-color-purple .ribbon-content:before, .ribbon-color-purple .ribbon-content:after {border-color: #57337b;}
+.ribbon-color-purple:before, .ribbon-color-purple:after {border-color: #6b478f;}
+
+.ribbon-color-red {background-color: #e92929;}
+.ribbon-color-red .ribbon-content:before, .ribbon-color-red .ribbon-content:after {border-color: #ad1717;}
+.ribbon-color-red:before, .ribbon-color-red:after {border-color: #ba2c2c;}
+
+.ribbon-color-gold {background-color: #d4d200;}
+.ribbon-color-gold .ribbon-content:before, .ribbon-color-gold .ribbon-content:after {border-color: #969400;}
+.ribbon-color-gold:before, .ribbon-color-gold:after {border-color: #aba905;}
+
+
+.ribbon:before {
+    left: -2em;
+    border-right-width: 1.5em;
+    border-left-color: transparent;
 }
-
-#ribbon .base:after {
-	content: '';
-	position: absolute;
-	top: 0;
-	width: 86px;
-	left: 6px;
-	height: 242px;
-	border-left: 1px dashed #631a15;
-	border-right: 1px dashed #631a15;
-}
-
-#ribbon .base:before {
-	content: '';
-	position: absolute;
-	top: 0;
-	width: 86px;
-	left: 7px;
-	height: 242px;
-	border-left: 1px dashed #da5050;
-	border-right: 1px dashed #da5050;
-}
-
-#ribbon .left_corner {
-	width: 100px;
-	height: 100px;
-	background: #b8201f;
-	position: absolute;
-	bottom: 20px;
-	left: -50px;
-	z-index: 1;
-	
-	-webkit-transform: rotate(45deg);
-	-moz-transform: rotate(45deg);
-	-ms-transform: rotate(45deg);
-	-o-transform: rotate(45deg);
-	transform: rotate(45deg);
-}
-
-#ribbon .right_corner {
-	width: 100px;
-	height: 100px;
-	background: #b8201f;
-	position: absolute;
-	bottom: 20px;
-	right: -50px;
-	z-index: 1;
-	
-	-webkit-transform: rotate(45deg);
-	-moz-transform: rotate(45deg);
-	-ms-transform: rotate(45deg);
-	-o-transform: rotate(45deg);
-	transform: rotate(45deg);
+.ribbon:after {
+    right: -2em;
+    border-left-width: 1.5em;
+    border-right-color: transparent;
 }

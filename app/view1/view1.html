@@ -1,19 +1,7 @@
-<div>
-    <span ng-repeat="resource in resources" class="label label-default resource" style="background-color: {{resource.color}}; margin-left: 5px;">
-        {{resource.name}} <img src="{{resource.img}}" alt="resource icon">
-    </span>
-</div>
-
-<div>
-    <span ng-repeat="cardType in cardTypes" class="label label-default cardtype" style="background-color: {{cardType.color}}; margin-left: 5px;">
-        {{cardType.name}} <img src="{{cardType.img}}" alt="card type icon">
-    </span>
-</div>
-
-<div class="container">
+<div class="container-card-setup">
     <div ng-repeat="setupType in setupCards">
-        <div ng-repeat="card in setupType" class="col-md-3 card-container">
-            <div class="card">
+        <div ng-repeat="card in setupType" class="card-container">
+            <div class="card card-setup">
                 <h3 ng-bind="card.name" class="name"></h3>
                 <span ng-bind="card.effect.name" class="effect"></span>
             </div>
@@ -21,23 +9,19 @@
     </div>
 </div>
 
-
-<div class="container">
-    <div ng-repeat="card in cards" class="col-md-3 card-container">
-        <div class="card">
-            <div class="type ribbon">
-                <div class="inset"></div>
-                <div class="container">
-                    <div class="base" ng-bind="card.type.name" ></div>
-                    <div class="left_corner"></div>
-                    <div class="right_corner"></div>
-                </div>
+<div class="container-card-play">
+    <div ng-repeat="card in cards" class="card-container">
+        <div class="card card-play">
+            <div class="ribbon ribbon-color-{{card.type.color}}">
+                <span class="ribbon-content type" ng-bind="card.type.name | uppercase" ></span>
             </div>
-            <h4 ng-bind="card.resource.name" class="resource"></h4>
-            <h3 ng-bind="card.name" class="name"></h3>
-            <span ng-bind="card.effect.name" class="effect"></span>
-            <h2 ng-bind="card.price" class="price"></h2>
-            <h2 ng-bind="card.points" class="points"></h2>
+            <span class="price" ng-bind="card.price"></span>
+            <span class="points" ng-bind="card.points"></span>
+            <div class="resource-container">
+                <span class="resource-{{card.resource.img}}" data-tooltip="{{card.resource.name}}"></span>
+            </div>
+            <div class="name" ng-bind="card.name"></div>
+            <div class="effect" ng-bind="card.effect.name" ></div>
         </div>
     </div>
 </div>

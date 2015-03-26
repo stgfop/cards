@@ -18,20 +18,18 @@ angular.module('myApp.view1', ['ngRoute'])
 
                 function init() {
                     var r = $scope.resources;
-                    r.whea = createResource("blé", "#f1c40f", "");
-                    r.ston = createResource("ardoise", "#95a5a6", "");
-                    r.wine = createResource("vin", "#8e44ad", "");
-                    r.wood = createResource("bois", "#d35400", "");
-                    r.clot = createResource("tissus", "#2980b9", "");
-                    r.weap = createResource("armes", "#c0392b", "");
-                    r.jewe = createResource("joyaux", "#c0392b", "");
+                    r.whea = createResource("blé", "wheat");
+                    r.ston = createResource("ardoise", "stone");
+                    r.gold = createResource("or", "gold");
+                    r.wool = createResource("laine", "wool");
+                    r.weap = createResource("fer", "iron");
 
                     var ct = $scope.cardTypes;
-                    ct.pay = createCardType("paysan", "#27ae60", "");
-                    ct.cle = createCardType("clergé", "#8e44ad", "");
-                    ct.bou = createCardType("bourgeois", "#2980b9", "");
-                    ct.kni = createCardType("chevalier", "#bdc3c7", "");
-                    ct.nob = createCardType("noble", "#f1c40f", "");
+                    ct.pay = createCardType("paysan", "green");
+                    ct.cle = createCardType("clergé", "purple");
+                    ct.bou = createCardType("bourgeois", "gold");
+                    ct.kni = createCardType("chevalier" ,"blue");
+                    ct.nob = createCardType("noble", "red");
 
                     var e = $scope.effects;
                     e.none = createEffect("", "noeffect");
@@ -69,36 +67,36 @@ angular.module('myApp.view1', ['ngRoute'])
                 }
 
                 function initCards(r, ct, e) {
-                    initCardsBase(e, r.weat, ct.pay, e.pp_kni, ct.kni, e.cp_cle, ct.cle);
-                    initCardsBase(e, r.wine, ct.cle, e.pp_nob, ct.nob, e.cp_bou, ct.bou);
-                    initCardsBase(e, r.clot, ct.bou, e.pp_pay, ct.pay, e.cp_kni, ct.kni);
+                    initCardsBase(e, r.whea, ct.pay, e.pp_kni, ct.kni, e.cp_cle, ct.cle);
+                    initCardsBase(e, r.wool, ct.cle, e.pp_nob, ct.nob, e.cp_bou, ct.bou);
+                    initCardsBase(e, r.gold, ct.bou, e.pp_pay, ct.pay, e.cp_kni, ct.kni);
                     initCardsBase(e, r.weap, ct.kni, e.pp_cle, ct.cle, e.cp_nob, ct.nob);
-                    initCardsBase(e, r.jewe, ct.nob, e.pp_bou, ct.bou, e.cp_pay, ct.pay);
+                    initCardsBase(e, r.ston, ct.nob, e.pp_bou, ct.bou, e.cp_pay, ct.pay);
 
-                    createPlayCard(r.weat, ct.bou, "", 1, 1, e.drawGold3);
-                    createPlayCard(r.weat, ct.nob, "", 2, 1, e.drawGold5);
+                    createPlayCard(r.whea, ct.bou, "", 1, 1, e.drawGold3);
+                    createPlayCard(r.whea, ct.nob, "", 2, 1, e.drawGold5);
 
-                    createPlayCard(r.wine, ct.kni, "", 1, 1, e.stealRich1);
-                    createPlayCard(r.wine, ct.pay, "", 2, 1, e.stealRich2);
+                    createPlayCard(r.wool, ct.kni, "", 1, 1, e.stealRich1);
+                    createPlayCard(r.wool, ct.pay, "", 2, 1, e.stealRich2);
 
-                    createPlayCard(r.clot, ct.nob, "", 1, 1, e.skipTrade1);
-                    createPlayCard(r.clot, ct.cle, "", 2, 1, e.skipTrade2);
+                    createPlayCard(r.gold, ct.nob, "", 1, 1, e.skipTrade1);
+                    createPlayCard(r.gold, ct.cle, "", 2, 1, e.skipTrade2);
 
                     createPlayCard(r.weap, ct.pay, "", 1, 1, e.stealNear1);
                     createPlayCard(r.weap, ct.bou, "", 2, 1, e.stealNear2);
 
-                    createPlayCard(r.jewe, ct.cle, "", 1, 1, e.refundTrade1);
-                    createPlayCard(r.jewe, ct.kni, "", 2, 1, e.refundTrade2);
+                    createPlayCard(r.ston, ct.cle, "", 1, 1, e.refundTrade1);
+                    createPlayCard(r.ston, ct.kni, "", 2, 1, e.refundTrade2);
 
                 }
 
                 function initCardsBase(e, resource, type, pointEffect, pointType, coinEffect, cointType) {
-                    createPlayCard(resource, type, "", 0, 1, e.none);
-                    createPlayCard(resource, type, "", 0, 1, e.none);
-                    createPlayCard(resource, type, "", 1, 2, e.none);
-                    createPlayCard(resource, type, "", 2, 1, e.doubleType);
-                    createPlayCard(resource, pointType, "", 3, 0, pointEffect);
-                    createPlayCard(resource, cointType, "", 3, 0, coinEffect);
+                    createPlayCard(resource, type, "cabane", 0, 1, e.none);
+                    createPlayCard(resource, type, "maison", 0, 1, e.none);
+                    createPlayCard(resource, type, "villa", 1, 2, e.none);
+                    createPlayCard(resource, type, "moulin", 2, 1, e.doubleType);
+                    createPlayCard(resource, pointType, "fortification", 3, 0, pointEffect);
+                    createPlayCard(resource, cointType, "chateau", 3, 0, coinEffect);
                 }
 
                 function initSetupCards(ct, e) {
@@ -125,19 +123,17 @@ angular.module('myApp.view1', ['ngRoute'])
 
                 }
 
-                function createResource(name, color, img) {
+                function createResource(name, img) {
                     return {
                         name: name,
-                        color: color,
                         img: img
                     }
                 }
 
-                function createCardType(name, color, img) {
+                function createCardType(name, color) {
                     return {
                         name: name,
-                        color: color,
-                        img: img
+                        color: color
                     }
                 }
 

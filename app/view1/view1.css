@@ -3,7 +3,7 @@
 }
 
 [class^="container-card-"] {
-    width: 20cm;
+    width: 35cm;
     border: 1px solid grey;
 }
 
@@ -20,16 +20,35 @@
     padding: 0.2cm;
 }
 
-.card-play .price, .card-play .points {
-    font-size: 0.8cm;
-    position: relative;
-    top: 0.4cm;
-    width: 48px;
-    text-align: center;
-    border: 1px solid pink;
-    background-size: 192px;
-    background-image: url("../assets/resources.png");
+.card-play .values {
+    max-height: 64px;
+}
 
+.card-play .values > span[score='0'] {
+    opacity: 0.2;
+}
+
+.card-play .price, .card-play .points {
+    position: relative;
+    display: inline-block;
+    width: 128px;
+    height: 128px;
+    text-align: center;
+    font-size: 1.5cm;
+    font-weight: 800;
+    line-height: 128px;
+    background-image: url("../assets/resources.png");
+    transform: scale(0.4);
+}
+
+.card-play .points {
+    top: -0.6cm;
+    left: -1.15cm;
+    color: white;
+}
+.card-play .price {
+    top: -4cm;
+    left: 2.8cm;
 }
 
 .card-play .type {
@@ -44,28 +63,22 @@
     text-transform: capitalize;
     text-align: center;
     max-height: 1.1cm;
-    overflow: hidden;
+    line-height: 1.1cm;
+    font-size: 150%;
 }
 
-.card-play .price {
-    float: left;
-}
-.card-play .points {
-    float: right;
-}
 
 [class^="resource-"] {
     display: inline-block;
     background-image: url("../assets/resources.png");
     width: 128px;
-    height: 148px;
+    height: 128px;
     overflow: hidden;
 }
 
 .card-play .resource-container {
     display: block;
-    margin: -0.01cm auto 0.2cm;
-    padding-top: 20px;
+    margin: -1cm auto 0.2cm;
     background: transparent;
 }
 
@@ -75,12 +88,23 @@
 .resource-wheat  {background-position: -384px 0    ;}
 .resource-iron   {background-position: 0      -128px;}
 .resource-gold   {background-position: -128px -128px;}
+.resource-meeple {background-position: -256px -128px;}
+.resource-score  {background-position: -384px -128px;}
 .resource-cloth  {background-position: 0      -256px;}
 .resource-wool   {background-position: -128px -256px;}
 .resource-tool   {background-position: -256px -256px;}
 .resource-jewel  {background-position: -384px -256px;}
-.resource-meeple {background-position: 0      0    ;}
-.resource-score  {background-position: 0      0    ;}
+
+
+.card-play .effect [class^="resource-"] {
+    position: relative;
+    top: 5px;
+    width: 32px;
+    height: 32px;
+    background-size: 128px;
+}
+.card-play .effect .resource-meeple {background-position: -64px -32px;}
+.card-play .effect .resource-score {background-position: -96px -32px;}
 
 
 .ribbon {

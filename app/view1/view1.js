@@ -8,7 +8,6 @@ angular.module('myApp.view1', ['ngRoute'])
                     controller: 'View1Ctrl'
                 });
             }])
-
         .controller('View1Ctrl', ['$scope', function($scope) {
                 $scope.cards = [];
                 $scope.setupCards = {};
@@ -28,11 +27,14 @@ angular.module('myApp.view1', ['ngRoute'])
                     ct.pay = createCardType("paysan", "green");
                     ct.cle = createCardType("clergé", "purple");
                     ct.bou = createCardType("bourgeois", "gold");
-                    ct.kni = createCardType("chevalier" ,"blue");
+                    ct.kni = createCardType("chevalier", "blue");
                     ct.nob = createCardType("noble", "red");
 
                     var e = $scope.effects;
                     e.none = createEffect("", "noeffect");
+                    e.addMeeple1 = createEffect("+<meeple>");
+                    e.addMeeple2 = createEffect("+<meeple><meeple>");
+
                     e.drawGold3 = createEffect("piochez 3 pieces", "drawGold3");
                     e.drawGold5 = createEffect("piochez 5 pieces", "drawGold5");
                     e.stealNear1 = createEffect("volez 1 piece à vos voisins", "stealNear1");
@@ -43,17 +45,11 @@ angular.module('myApp.view1', ['ngRoute'])
                     e.refundTrade2 = createEffect("récupérez jusqu'à 2 pieces après un échange", "refundTrade2");
                     e.skipTrade1 = createEffect("ne payez rien au premier douanier", "skipTrade1");
                     e.skipTrade2 = createEffect("ne payez rien au deux premier douaniers", "skipTrade2");
-                    e.pp_pay = createEffect("1 points par Paysan", "pp");
-                    e.pp_cle = createEffect("1 points par Prêtre", "pp");
-                    e.pp_bou = createEffect("1 points par Bourgeois", "pp");
-                    e.pp_kni = createEffect("1 points par Chevalier", "pp");
-                    e.pp_nob = createEffect("1 points par Nobles", "pp");
-                    e.cp_pay = createEffect("2 pieces par Paysan", "cp");
-                    e.cp_cle = createEffect("2 pieces par Prêtre", "cp");
-                    e.cp_bou = createEffect("2 pieces par Bourgeois", "cp");
-                    e.cp_kni = createEffect("2 pieces par Chevalier", "cp");
-                    e.cp_nob = createEffect("2 pieces par Nobles", "cp");
-                    e.doubleType = createEffect("support compte double", "doubleType");
+                    e.pp_pay = createEffect("<score>/Paysan", "pp");
+                    e.pp_cle = createEffect("<score>/Prêtre", "pp");
+                    e.pp_bou = createEffect("<score>/Bourgeois", "pp");
+                    e.pp_kni = createEffect("<score>/Chevalier", "pp");
+                    e.pp_nob = createEffect("<score>/Nobles", "pp");
 
                     e.s_pParC = createEffect("1 point par carte", "s_pParC");
                     e.s_pSansC = createEffect("-1 point si pas carte", "s_pSansC");
@@ -67,11 +63,11 @@ angular.module('myApp.view1', ['ngRoute'])
                 }
 
                 function initCards(r, ct, e) {
-                    initCardsBase(e, r.whea, ct.pay, e.pp_kni, ct.kni, e.cp_cle, ct.cle);
-                    initCardsBase(e, r.wool, ct.cle, e.pp_nob, ct.nob, e.cp_bou, ct.bou);
-                    initCardsBase(e, r.gold, ct.bou, e.pp_pay, ct.pay, e.cp_kni, ct.kni);
-                    initCardsBase(e, r.weap, ct.kni, e.pp_cle, ct.cle, e.cp_nob, ct.nob);
-                    initCardsBase(e, r.ston, ct.nob, e.pp_bou, ct.bou, e.cp_pay, ct.pay);
+                    initCardsBase(e, r.whea, ct.pay, e.pp_kni, ct.kni, ct.cle);
+                    initCardsBase(e, r.wool, ct.cle, e.pp_nob, ct.nob, ct.bou);
+                    initCardsBase(e, r.gold, ct.bou, e.pp_pay, ct.pay, ct.kni);
+                    initCardsBase(e, r.weap, ct.kni, e.pp_cle, ct.cle, ct.nob);
+                    initCardsBase(e, r.ston, ct.nob, e.pp_bou, ct.bou, ct.pay);
 
                     createPlayCard(r.whea, ct.bou, "", 1, 1, e.drawGold3);
                     createPlayCard(r.whea, ct.nob, "", 2, 1, e.drawGold5);
@@ -90,13 +86,13 @@ angular.module('myApp.view1', ['ngRoute'])
 
                 }
 
-                function initCardsBase(e, resource, type, pointEffect, pointType, coinEffect, cointType) {
-                    createPlayCard(resource, type, "cabane", 0, 1, e.none);
-                    createPlayCard(resource, type, "maison", 0, 1, e.none);
-                    createPlayCard(resource, type, "villa", 1, 2, e.none);
-                    createPlayCard(resource, type, "moulin", 2, 1, e.doubleType);
+                function initCardsBase(e, resource, type, pointEffect, pointType, cointType) {
+                    createPlayCard(resource, type, "maison", 0, 0, e.addMeeple1);
+                    createPlayCard(resource, type, "maison", 0, 0, e.addMeeple1);
+                    createPlayCard(resource, type, "villa", 1, 1, e.none);
+                    createPlayCard(resource, type, "moulin", 2, 2, e.none);
                     createPlayCard(resource, pointType, "fortification", 3, 0, pointEffect);
-                    createPlayCard(resource, cointType, "chateau", 3, 0, coinEffect);
+                    createPlayCard(resource, cointType, "chateau", 3, 3, e.none);
                 }
 
                 function initSetupCards(ct, e) {
@@ -144,13 +140,13 @@ angular.module('myApp.view1', ['ngRoute'])
                     }
                 }
 
-                function createPlayCard(resource, type, name, price, points, effect) {
+                function createPlayCard(resource, type, name, meeple, score, effect) {
                     $scope.cards.push({
                         resource: resource,
                         name: name,
                         type: type,
-                        price: price,
-                        points: points,
+                        meeple: meeple,
+                        score: score,
                         effect: effect
                     });
                 }
@@ -165,4 +161,19 @@ angular.module('myApp.view1', ['ngRoute'])
 
                 init();
 
-            }]);
+            }])
+        .directive('effect', function() {
+
+            return {
+                restrict: 'A',
+                scope: {
+                    effect: '='
+                },
+                link: function(scope, element, attrs) {
+                    var e = scope.effect;
+                    e = e.replace(/<meeple>/g, '<span class="resource-meeple"></span>')
+                    e = e.replace(/<score>/g, '<span class="resource-score"></span>')
+                    e = e.replace(/<ribbon (\w+)>/g, '<span class="resource-ribbon ribbon-$1"></span>')
+                    return element.html(e);
+                }}
+        });

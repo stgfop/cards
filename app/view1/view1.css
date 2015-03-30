@@ -1,178 +1,209 @@
-* {
-    font-family: Aladin;
-}
+@media screen, print {
 
-[class^="container-card-"] {
-    width: 35cm;
-    border: 1px solid grey;
-}
+    * {
+        font-family: Aladin;
+    }
 
-.card-container {
-    display: inline;
-}
+    .menu {
+        display: none;
+    }
 
-.card {
-    display: inline-block;
-    width: 5.6cm;
-    height: 8.2cm;
-    border: 3px solid black;
-    margin: 2px;
-    padding: 0.2cm;
-}
+    [class^="container-card-"] {
+        width: 21cm;
+        border-right: 1px solid gray;
+    }
+    
+    .card-container {
+        display: inline;
+        margin-right: -2px;
+    }
 
-.card-play .values {
-    max-height: 64px;
-}
+    .card {
+        display: inline-block;
+        width: 5.6cm;
+        height: 8.2cm;
+        border: 4px solid black;
+        margin: 0 0;
+        padding: 0.2cm;
+    }
 
-.card-play .values > span[score='0'] {
-    opacity: 0.2;
-}
-
-.card-play .price, .card-play .points {
-    position: relative;
-    display: inline-block;
-    width: 128px;
-    height: 128px;
-    text-align: center;
-    font-size: 1.5cm;
-    font-weight: 800;
-    line-height: 128px;
-    background-image: url("../assets/resources.png");
-    transform: scale(0.4);
-}
-
-.card-play .points {
-    top: -0.6cm;
-    left: -1.15cm;
-    color: white;
-}
-.card-play .price {
-    top: -4cm;
-    left: 2.8cm;
-}
-
-.card-play .type {
-}
-.card-play .name {
-    font-size: 2em;
-    text-transform: capitalize;
-    text-align: center;
-    margin-bottom: 0.2cm;
-}
-.card-play .effect {
-    text-transform: capitalize;
-    text-align: center;
-    max-height: 1.1cm;
-    line-height: 1.1cm;
-    font-size: 150%;
-}
+    .card-setup .effect {
+        margin-top: 2.8cm;
+    }
 
 
-[class^="resource-"] {
-    display: inline-block;
-    background-image: url("../assets/resources.png");
-    width: 128px;
-    height: 128px;
-    overflow: hidden;
-}
+    .card-play .values {
+        max-height: 64px;
+    }
 
-.card-play .resource-container {
-    display: block;
-    margin: -1cm auto 0.2cm;
-    background: transparent;
-}
+    .card-play .values > span[score='0'] {
+        opacity: 0.2;
+    }
 
-.resource-argile {background-position: 0      0    ;}
-.resource-stone  {background-position: -128px 0    ;}
-.resource-wood   {background-position: -256px 0    ;}
-.resource-wheat  {background-position: -384px 0    ;}
-.resource-iron   {background-position: 0      -128px;}
-.resource-gold   {background-position: -128px -128px;}
-.resource-meeple {background-position: -256px -128px;}
-.resource-score  {background-position: -384px -128px;}
-.resource-cloth  {background-position: 0      -256px;}
-.resource-wool   {background-position: -128px -256px;}
-.resource-tool   {background-position: -256px -256px;}
-.resource-jewel  {background-position: -384px -256px;}
+    .card-play .price, .card-play .points {
+        position: relative;
+        display: inline-block;
+        width: 128px;
+        height: 128px;
+        text-align: center;
+        font-size: 1.5cm;
+        font-weight: 800;
+        line-height: 128px;
+        background-image: url("../assets/resources.png");
+        transform: scale(0.4);
+    }
 
+    .card-play .points {
+        top: -0.6cm;
+        left: -1.15cm;
+        color: white;
+    }
+    .card-play .price {
+        top: -4cm;
+        left: 2.8cm;
+    }
 
-.card-play .effect [class^="resource-"] {
-    position: relative;
-    top: 5px;
-    width: 32px;
-    height: 32px;
-    background-size: 128px;
-}
-.card-play .effect .resource-meeple {background-position: -64px -32px;}
-.card-play .effect .resource-score {background-position: -96px -32px;}
-
-
-.ribbon {
-    font-size: 16px !important;
-    /* This ribbon is based on a 16px font side and a 24px vertical rhythm. I've used em's to position each element for scalability. If you want to use a different font size you may have to play with the position of the ribbon elements */
-
-    width: 3.5cm;
-
-    position: relative;
-    background: pink;
-    color: white;
-    text-align: center;
-    padding: 0.2cm 0.5cm; /* Adjust to suit */
-    margin: 0 auto 0; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
-}
-.ribbon:before, .ribbon:after {
-    content: "";
-    position: absolute;
-    display: block;
-    bottom: -0.3cm;
-    border: 0.5cm solid #986794;
-    z-index: -1;
-}
-.ribbon .ribbon-content:before, .ribbon .ribbon-content:after {
-    content: "";
-    position: absolute;
-    display: block;
-    border-style: solid;
-    border-color: #804f7c transparent transparent transparent;
-    bottom: -0.3cm;
-}
-.ribbon .ribbon-content:before {
-    left: 0;
-    border-width: 0.3cm 0 0 0.3cm;
-}
-.ribbon .ribbon-content:after {
-    right: 0;
-    border-width: 0.3cm 0.3cm 0 0;
-}
-
-.ribbon-color-blue {background-color: #5682c4;}
-.ribbon-color-blue .ribbon-content:before, .ribbon-color-blue .ribbon-content:after {border-color: #325282;}
-.ribbon-color-blue:before, .ribbon-color-blue:after {border-color: #476899;}
-
-.ribbon-color-green {background-color: #39ac45;}
-.ribbon-color-green .ribbon-content:before, .ribbon-color-green .ribbon-content:after {border-color: #23692a;}
-.ribbon-color-green:before, .ribbon-color-green:after {border-color: #2c8535;}
-
-.ribbon-color-purple {background-color: #8752be;}
-.ribbon-color-purple .ribbon-content:before, .ribbon-color-purple .ribbon-content:after {border-color: #57337b;}
-.ribbon-color-purple:before, .ribbon-color-purple:after {border-color: #6b478f;}
-
-.ribbon-color-red {background-color: #e92929;}
-.ribbon-color-red .ribbon-content:before, .ribbon-color-red .ribbon-content:after {border-color: #ad1717;}
-.ribbon-color-red:before, .ribbon-color-red:after {border-color: #ba2c2c;}
-
-.ribbon-color-gold {background-color: #d4d200;}
-.ribbon-color-gold .ribbon-content:before, .ribbon-color-gold .ribbon-content:after {border-color: #969400;}
-.ribbon-color-gold:before, .ribbon-color-gold:after {border-color: #aba905;}
+    .card-play .type {
+    }
+    .card-play .name {
+        font-size: 2em;
+        text-transform: capitalize;
+        text-align: center;
+        margin-bottom: 0.2cm;
+    }
+    .card-play .effect, .card-setup .effect {
+        text-transform: capitalize;
+        text-align: center;
+        max-height: 1.1cm;
+        line-height: 1.1cm;
+        font-size: 150%;
+    }
 
 
-.ribbon:before {
-    left: -2em;
-    border-right-width: 1.5em;
-    border-left-color: transparent;
-}
-.ribbon:after {
-    right: -2em;
-    border-left-width: 1.5em;
-    border-right-color: transparent;
+    [class^="resource-"] {
+        display: inline-block;
+        background-image: url("../assets/resources.png");
+        width: 128px;
+        height: 128px;
+        overflow: hidden;
+    }
+
+    .resource-container {
+        display: block;
+        margin: -1cm auto 0.2cm;
+        background: transparent;
+    }
+
+    .resource-argile   {background-position: 0      0    ;}
+    .resource-stone    {background-position: -128px 0    ;}
+    .resource-wood     {background-position: -256px 0    ;}
+    .resource-wheat    {background-position: -384px 0    ;}
+    .resource-iron     {background-position: 0      -128px;}
+    .resource-gold     {background-position: -128px -128px;}
+    .resource-meeple   {background-position: -256px -128px;}
+    .resource-score    {background-position: -384px -128px;}
+    .resource-cloth    {background-position: 0      -256px;}
+    .resource-wool     {background-position: -128px -256px;}
+    .resource-tool     {background-position: -256px -256px;}
+    .resource-jewel    {background-position: -384px -256px;}
+    .resource-ribbon   {background-position: 0      -384px;}
+    .resource-arrow    {background-position: -128px -384px;}
+    .resource-player   {background-position: -256px -384px;}
+    .resource-none     {background-position: -384px -384px;}
+
+
+    .effect [class^="resource-"] {
+        position: relative;
+        top: 5px;
+        width: 32px;
+        height: 32px;
+        background-size: 128px;
+    }
+    .effect .resource-meeple   {background-position: -64px -32px;}
+    .effect .resource-score    {background-position: -96px -32px;}
+    .effect .resource-ribbon   {background-position: 0     -96px;}
+    .effect .resource-arrow    {background-position: -32px -96px;}
+    .effect .resource-player   {background-position: -64px -96px;}
+    .effect .resource-none     {background-position: -96px -96px;}
+    .effect .resource-arrow-left    {
+        background-position: -32px -96px;
+        transform: rotateY(180deg);
+    }
+
+    .resource-ribbon-blue   {filter: hue-rotate(80deg) brightness(0.7) saturate(1.3);}
+    .resource-ribbon-green  {}
+    .resource-ribbon-purple {filter: hue-rotate(140deg) brightness(0.7);}
+    .resource-ribbon-gold   {filter: hue-rotate(-53deg) saturate(7);}
+    .resource-ribbon-red    {filter: hue-rotate(243deg) brightness(0.69) saturate(2);}
+
+
+    .ribbon {
+        font-size: 16px !important;
+        /* This ribbon is based on a 16px font side and a 24px vertical rhythm. I've used em's to position each element for scalability. If you want to use a different font size you may have to play with the position of the ribbon elements */
+
+        width: 3.5cm;
+
+        position: relative;
+        background: pink;
+        color: white;
+        text-align: center;
+        padding: 0.2cm 0.5cm; /* Adjust to suit */
+        margin: 0 auto 0; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
+    }
+    .ribbon:before, .ribbon:after {
+        content: "";
+        position: absolute;
+        display: block;
+        bottom: -0.3cm;
+        border: 0.5cm solid #986794;
+        z-index: -1;
+    }
+    .ribbon .ribbon-content:before, .ribbon .ribbon-content:after {
+        content: "";
+        position: absolute;
+        display: block;
+        border-style: solid;
+        border-color: #804f7c transparent transparent transparent;
+        bottom: -0.3cm;
+    }
+    .ribbon .ribbon-content:before {
+        left: 0;
+        border-width: 0.3cm 0 0 0.3cm;
+    }
+    .ribbon .ribbon-content:after {
+        right: 0;
+        border-width: 0.3cm 0.3cm 0 0;
+    }
+
+    .ribbon-color-blue {background-color: #5682c4;}
+    .ribbon-color-blue .ribbon-content:before, .ribbon-color-blue .ribbon-content:after {border-color: #325282;}
+    .ribbon-color-blue:before, .ribbon-color-blue:after {border-color: #476899;}
+
+    .ribbon-color-green {background-color: #39ac45;}
+    .ribbon-color-green .ribbon-content:before, .ribbon-color-green .ribbon-content:after {border-color: #23692a;}
+    .ribbon-color-green:before, .ribbon-color-green:after {border-color: #2c8535;}
+
+    .ribbon-color-purple {background-color: #8752be;}
+    .ribbon-color-purple .ribbon-content:before, .ribbon-color-purple .ribbon-content:after {border-color: #57337b;}
+    .ribbon-color-purple:before, .ribbon-color-purple:after {border-color: #6b478f;}
+
+    .ribbon-color-red {background-color: #e92929;}
+    .ribbon-color-red .ribbon-content:before, .ribbon-color-red .ribbon-content:after {border-color: #ad1717;}
+    .ribbon-color-red:before, .ribbon-color-red:after {border-color: #ba2c2c;}
+
+    .ribbon-color-gold {background-color: #d4d200;}
+    .ribbon-color-gold .ribbon-content:before, .ribbon-color-gold .ribbon-content:after {border-color: #969400;}
+    .ribbon-color-gold:before, .ribbon-color-gold:after {border-color: #aba905;}
+
+
+    .ribbon:before {
+        left: -2em;
+        border-right-width: 1.5em;
+        border-left-color: transparent;
+    }
+    .ribbon:after {
+        right: -2em;
+        border-left-width: 1.5em;
+        border-right-color: transparent;
+    }
 }

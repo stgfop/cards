@@ -2,14 +2,13 @@
     <div ng-repeat="setupType in setupCards">
         <div ng-repeat="card in setupType" class="card-container">
             <div class="card card-setup">
-                <h3 ng-bind="card.name" class="name"></h3>
-                <span ng-bind="card.effect.name" class="effect"></span>
+                <div class="ribbon ribbon-color-{{card.type.color}}">
+                    <span class="ribbon-content type" ng-bind="card.type.name | uppercase" ></span>
+                </div>
+                <div class="effect" effect="card"></div>
             </div>
         </div>
     </div>
-</div>
-
-<div class="container-card-play">
     <div ng-repeat="card in cards" class="card-container">
         <div class="card card-play">
             <div class="ribbon ribbon-color-{{card.type.color}}">
@@ -23,7 +22,7 @@
                 <span class="resource-{{card.resource.img}}" data-tooltip="{{card.resource.name}}"></span>
             </div>
             <div class="name" ng-bind="card.name"></div>
-            <div class="effect" effect="card.effect.name"></div>
+            <div class="effect" effect="card"></div>
         </div>
     </div>
 </div>

@@ -31,32 +31,29 @@ angular.module('myApp.view1', ['ngRoute'])
                     ct.nob = createCardType("noble", "red");
 
                     var e = $scope.effects;
-                    e.none = createEffect("", "noeffect");
+                    e.none = createEffect("<none>", "noeffect");
                     e.addMeeple1 = createEffect("+<meeple>");
                     e.addMeeple2 = createEffect("+<meeple><meeple>");
 
-                    e.drawGold3 = createEffect("piochez 3 pieces", "drawGold3");
-                    e.drawGold5 = createEffect("piochez 5 pieces", "drawGold5");
-                    e.stealNear1 = createEffect("volez 1 piece à vos voisins", "stealNear1");
-                    e.stealNear2 = createEffect("volez 2 pieces à vos voisins", "stealNear2");
-                    e.stealRich1 = createEffect("volez 2 piece au plus riche", "stealRich1");
-                    e.stealRich2 = createEffect("volez 3 pieces au plus riche", "stealRich2");
-                    e.refundTrade1 = createEffect("récupérez une piece après un échange", "refundTrade1");
-                    e.refundTrade2 = createEffect("récupérez jusqu'à 2 pieces après un échange", "refundTrade2");
-                    e.skipTrade1 = createEffect("ne payez rien au premier douanier", "skipTrade1");
-                    e.skipTrade2 = createEffect("ne payez rien au deux premier douaniers", "skipTrade2");
-                    e.pp_pay = createEffect("<score>/Paysan", "pp");
-                    e.pp_cle = createEffect("<score>/Prêtre", "pp");
-                    e.pp_bou = createEffect("<score>/Bourgeois", "pp");
-                    e.pp_kni = createEffect("<score>/Chevalier", "pp");
-                    e.pp_nob = createEffect("<score>/Nobles", "pp");
+                    e.stealNear1 = createEffect("<player><arrow-left><meeple>", "stealNear1");
+                    e.stealNear2 = createEffect("<meeple><arrow><player>", "stealNear2");
+                    e.stealRich1 = createEffect("<meeple><arrow>+<meeple>", "stealRich1");
+                    e.stealRich2 = createEffect("<meeple><meeple><arrow>+<meeple>", "stealRich2");
+                    e.refundTrade1 = createEffect("+<meeple> après un échange", "refundTrade1");
+                    e.skipTrade1 = createEffect("-<meeple> lors d'un échange", "skipTrade1");
+                    e.pp_pay = createEffect("<score>/<ribbon>", "pp");
+                    e.pp_cle = createEffect("<score>/<ribbon>", "pp");
+                    e.pp_bou = createEffect("<score>/<ribbon>", "pp");
+                    e.pp_kni = createEffect("<score>/<ribbon>", "pp");
+                    e.pp_nob = createEffect("<score>/<ribbon>", "pp");
+                    e.pointPer3meeple = createEffect("<score>/3<meeple>", "sm");
 
-                    e.s_pParC = createEffect("1 point par carte", "s_pParC");
-                    e.s_pSansC = createEffect("-1 point si pas carte", "s_pSansC");
-                    e.s_pPlusC = createEffect("3 points majoritaire", "s_pPlusC");
-                    e.s_pSiC = createEffect("2 points si carte", "s_pSiC");
-                    e.s_pPiece = createEffect("1 points pour 3 pieces", "s_pPiece");
-                    e.s_pCarteDiff = createEffect("1 points par carte differente", "s_pCarteDiff");
+                    e.s_pParC = createEffect("<score>/<ribbon>", "s_pParC");
+                    e.s_pSansC = createEffect("-<score> sans <ribbon>", "s_pSansC");
+                    e.s_pPlusC = createEffect("3<score> si max <ribbon>", "s_pPlusC");
+                    e.s_pSiC = createEffect("2 <score> si <ribbon>", "s_pSiC");
+                    e.s_pPiece = createEffect("<score>/3<meeple>", "s_pPiece");
+                    e.s_pCarteDiff = createEffect("<score>/<ribbon-red><ribbon-blue><ribbon-green>...", "s_pCarteDiff");
 
                     initSetupCards(ct, e);
                     initCards(r, ct, e);
@@ -64,26 +61,24 @@ angular.module('myApp.view1', ['ngRoute'])
 
                 function initCards(r, ct, e) {
                     initCardsBase(e, r.whea, ct.pay, e.pp_kni, ct.kni, ct.cle);
+                    createPlayCard(r.whea, ct.bou, "Ferme", 1, 1, e.addMeeple1);
+                    createPlayCard(r.whea, ct.nob, "Ferme", 2, 1, e.addMeeple2);
+
                     initCardsBase(e, r.wool, ct.cle, e.pp_nob, ct.nob, ct.bou);
+                    createPlayCard(r.wool, ct.kni, "Ferme", 1, 1, e.stealRich1);
+                    createPlayCard(r.wool, ct.pay, "Ferme", 2, 1, e.stealRich2);
+
                     initCardsBase(e, r.gold, ct.bou, e.pp_pay, ct.pay, ct.kni);
+                    createPlayCard(r.gold, ct.nob, "Ferme", 1, 1, e.skipTrade1);
+                    createPlayCard(r.gold, ct.cle, "Ferme", 2, 1, e.skipTrade1);
+                    
                     initCardsBase(e, r.weap, ct.kni, e.pp_cle, ct.cle, ct.nob);
+                    createPlayCard(r.weap, ct.pay, "Ferme", 1, 1, e.stealNear1);
+                    createPlayCard(r.weap, ct.bou, "Ferme", 2, 1, e.stealNear2);
+                    
                     initCardsBase(e, r.ston, ct.nob, e.pp_bou, ct.bou, ct.pay);
-
-                    createPlayCard(r.whea, ct.bou, "", 1, 1, e.drawGold3);
-                    createPlayCard(r.whea, ct.nob, "", 2, 1, e.drawGold5);
-
-                    createPlayCard(r.wool, ct.kni, "", 1, 1, e.stealRich1);
-                    createPlayCard(r.wool, ct.pay, "", 2, 1, e.stealRich2);
-
-                    createPlayCard(r.gold, ct.nob, "", 1, 1, e.skipTrade1);
-                    createPlayCard(r.gold, ct.cle, "", 2, 1, e.skipTrade2);
-
-                    createPlayCard(r.weap, ct.pay, "", 1, 1, e.stealNear1);
-                    createPlayCard(r.weap, ct.bou, "", 2, 1, e.stealNear2);
-
-                    createPlayCard(r.ston, ct.cle, "", 1, 1, e.refundTrade1);
-                    createPlayCard(r.ston, ct.kni, "", 2, 1, e.refundTrade2);
-
+                    createPlayCard(r.ston, ct.cle, "Ferme", 1, 1, e.refundTrade1);
+                    createPlayCard(r.ston, ct.kni, "Ferme", 2, 1, e.refundTrade1);
                 }
 
                 function initCardsBase(e, resource, type, pointEffect, pointType, cointType) {
@@ -91,8 +86,8 @@ angular.module('myApp.view1', ['ngRoute'])
                     createPlayCard(resource, type, "maison", 0, 0, e.addMeeple1);
                     createPlayCard(resource, type, "villa", 1, 1, e.none);
                     createPlayCard(resource, type, "moulin", 2, 2, e.none);
-                    createPlayCard(resource, pointType, "fortification", 3, 0, pointEffect);
-                    createPlayCard(resource, cointType, "chateau", 3, 3, e.none);
+                    createPlayCard(resource, cointType, "chateau", 3, 0, e.pointPer3meeple);
+                    createPlayCard(resource, pointType, "guilde", 3, 0, pointEffect);
                 }
 
                 function initSetupCards(ct, e) {
@@ -170,10 +165,16 @@ angular.module('myApp.view1', ['ngRoute'])
                     effect: '='
                 },
                 link: function(scope, element, attrs) {
-                    var e = scope.effect;
+                    var e = scope.effect.effect.name;
+                    var color = scope.effect.type.color;
                     e = e.replace(/<meeple>/g, '<span class="resource-meeple"></span>')
                     e = e.replace(/<score>/g, '<span class="resource-score"></span>')
-                    e = e.replace(/<ribbon (\w+)>/g, '<span class="resource-ribbon ribbon-$1"></span>')
+                    e = e.replace(/<ribbon>/g, '<span class="resource-ribbon resource-ribbon-'+color+'"></span>')
+                    e = e.replace(/<ribbon-(\w+)>/g, '<span class="resource-ribbon resource-ribbon-$1"></span>')
+                    e = e.replace(/<player>/g, '<span class="resource-player"></span>')
+                    e = e.replace(/<arrow>/g, '<span class="resource-arrow"></span>')
+                    e = e.replace(/<arrow-left>/g, '<span class="resource-arrow-left"></span>')
+                    e = e.replace(/<none>/g, '<span class="resource-none"></span>')
                     return element.html(e);
                 }}
         });

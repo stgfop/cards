@@ -1,12 +1,10 @@
 <div class="container-card-setup">
-    <div ng-repeat="setupType in setupCards">
-        <div ng-repeat="card in setupType" class="card-container">
-            <div class="card card-setup">
-                <div class="ribbon ribbon-color-{{card.type.color}}">
-                    <span class="ribbon-content type" ng-bind="card.type.name | uppercase" ></span>
-                </div>
-                <div class="effect" effect="card"></div>
+    <div ng-repeat="card in setupCards.all" class="card-container">
+        <div class="card card-setup">
+            <div class="ribbon ribbon-color-{{card.type.color}}">
+                <span class="ribbon-content type" ng-bind="card.type.name | uppercase" ></span>
             </div>
+            <div class="effect" effect="card"></div>
         </div>
     </div>
     <div ng-repeat="card in cards" class="card-container">
@@ -25,4 +23,9 @@
             <div class="effect" effect="card"></div>
         </div>
     </div>
+    <div ng-repeat="card in resources" class="card-container">
+        <div class="token">
+            <span class="resource-{{card.img}}" data-tooltip="{{card.name}}"></span>
+        </div>   
+    </div>   
 </div>

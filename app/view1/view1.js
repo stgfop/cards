@@ -10,25 +10,24 @@ angular.module('myApp.view1', ['ngRoute'])
             }])
         .controller('View1Ctrl', ['$scope', function($scope) {
                 $scope.cards = [];
-                $scope.setupCards = {};
                 $scope.resources = {};
                 $scope.cardTypes = {};
                 $scope.effects = {};
 
                 function init() {
-                    var r = $scope.resources;
-                    r.whea = createResource("blé", "wheat");
-                    r.ston = createResource("ardoise", "stone");
-                    r.gold = createResource("or", "gold");
-                    r.wool = createResource("laine", "wool");
-                    r.weap = createResource("fer", "iron");
-
                     var ct = $scope.cardTypes;
                     ct.pay = createCardType("paysan", "green");
                     ct.cle = createCardType("clergé", "purple");
                     ct.bou = createCardType("bourgeois", "gold");
                     ct.kni = createCardType("chevalier", "blue");
                     ct.nob = createCardType("noble", "red");
+
+                    var r = $scope.resources;
+                    r.whea = createResource("blé", "wheat", ct.pay.color);
+                    r.ston = createResource("ardoise", "stone", ct.nob.color);
+                    r.gold = createResource("or", "gold", ct.bou.color);
+                    r.wool = createResource("laine", "wool", ct.cle.color);
+                    r.weap = createResource("fer", "iron", ct.kni.color);
 
                     var e = $scope.effects;
                     e.none = createEffect("<none>", "noeffect");
@@ -55,7 +54,6 @@ angular.module('myApp.view1', ['ngRoute'])
                     e.s_pPiece = createEffect("<score> / 3 <meeple>", "s_pPiece");
                     e.s_pCarteDiff = createEffect("<score> / ≠<ribbon-gray>", "s_pCarteDiff");
 
-                    initSetupCards(ct, e);
                     initCards(r, ct, e);
                 }
 
@@ -90,40 +88,13 @@ angular.module('myApp.view1', ['ngRoute'])
                     createPlayCard(resource, pointType, "guilde", 3, 0, pointEffect);
                 }
 
-                function initSetupCards(ct, e) {
-                    $scope.setupCards.pay = [createSetupCard(ct.pay, "Paysans", e.s_pPlusC)];
-                    $scope.setupCards.cle = [createSetupCard(ct.cle, "Prêtres", e.s_pPlusC)];
-                    $scope.setupCards.bou = [createSetupCard(ct.bou, "Bourgeois", e.s_pPlusC)];
-                    $scope.setupCards.kni = [createSetupCard(ct.kni, "Chevaliers", e.s_pPlusC)];
-                    $scope.setupCards.nob = [createSetupCard(ct.nob, "Nobles", e.s_pPlusC)];
+               
 
-                    $scope.setupCards.pay.push(createSetupCard(ct.pay, "Paysans", e.s_pParC));
-                    $scope.setupCards.bou.push(createSetupCard(ct.bou, "Bourgeois", e.s_pParC));
-
-                    $scope.setupCards.pay.push(createSetupCard(ct.pay, "Paysans", e.s_pSansC));
-                    $scope.setupCards.cle.push(createSetupCard(ct.cle, "Prêtres", e.s_pSansC));
-
-                    $scope.setupCards.bou.push(createSetupCard(ct.bou, "Bourgeois", e.s_pPiece));
-                    $scope.setupCards.nob.push(createSetupCard(ct.nob, "Nobles", e.s_pPiece));
-
-                    $scope.setupCards.cle.push(createSetupCard(ct.cle, "Prêtres", e.s_pSiC));
-                    $scope.setupCards.kni.push(createSetupCard(ct.kni, "Chevaliers", e.s_pSiC));
-
-                    $scope.setupCards.kni.push(createSetupCard(ct.kni, "Chevaliers", e.s_pCarteDiff));
-                    $scope.setupCards.nob.push(createSetupCard(ct.nob, "Nobles", e.s_pCarteDiff));
-
-                    $scope.setupCards.all = $scope.setupCards.pay
-                            .concat($scope.setupCards.cle)
-                            .concat($scope.setupCards.bou)
-                            .concat($scope.setupCards.kni)
-                            .concat($scope.setupCards.nob);
-
-                }
-
-                function createResource(name, img) {
+                function createResource(name, img, color) {
                     return {
                         name: name,
-                        img: img
+                        img: img,
+                        color: color
                     }
                 }
 
@@ -150,14 +121,6 @@ angular.module('myApp.view1', ['ngRoute'])
                         score: score,
                         effect: effect
                     });
-                }
-
-                function createSetupCard(type, name, effect) {
-                    return {
-                        name: name,
-                        type: type,
-                        effect: effect
-                    };
                 }
 
                 init();
